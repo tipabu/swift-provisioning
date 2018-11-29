@@ -1,0 +1,21 @@
+- hosts: localhost
+  connection: local
+  vars:
+    keystone_admin:
+      auth_url: http://saio:35357
+      user_domain_name: Default
+      username: keystone
+      password: keystone
+      project_domain_name: Default
+      project_name: service
+  roles:
+    # TODO: move service setup out to separate playbook/role?
+    - keystone/service/swift
+    - keystone/user/swift
+
+    - keystone/user/primary
+    - keystone/user/alternate
+    - keystone/user/non-admin
+    - keystone/user/other-domain
+    - keystone/user/swift-service
+    - keystone/user/swift-reseller-admin

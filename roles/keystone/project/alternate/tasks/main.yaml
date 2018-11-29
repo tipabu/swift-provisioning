@@ -1,0 +1,6 @@
+- name: Create alternate project
+  os_project:
+    auth: "{{ keystone_admin }}"
+    domain: Default
+    name: test2
+  register: alternate_project

@@ -1,0 +1,5 @@
+- name: Create swift_service role
+  os_keystone_role:
+    auth: "{{ keystone_admin }}"
+    name: swift_service
+  register: role_swift_service

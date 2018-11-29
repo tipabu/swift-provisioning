@@ -1,0 +1,3 @@
+dependencies:
+  - role: keystone/project/service
+  - role: keystone/role/service

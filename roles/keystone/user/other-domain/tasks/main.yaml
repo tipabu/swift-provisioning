@@ -1,0 +1,19 @@
+# See https://github.com/ansible/ansible/issues/42901 and the fix
+# in https://github.com/ansible/ansible/pull/42899/commits/724e2f0
+- name: Create other-domain user
+  os_user:
+    auth: "{{ keystone_admin }}"
+    domain: "{{ other_domain.domain.id }}"
+    name: "{{ primary_user.user.name }}"
+    password: testing4
+    update_password: on_create
+    default_project: "{{ other_domain_project.project.id }}"
+  register: other_domain_user
+
+- name: Assign swift_owner role to other-domain user for other-domain project
+  os_user_role:
+    auth: "{{ keystone_admin }}"
+    project: "{{ other_domain_project.project.id }}"
+    user: "{{ other_domain_user.user.id }}"
+    # TODO: or should this be swift_noaccess?
+    role: "{{ role_swift_owner.role.id }}"

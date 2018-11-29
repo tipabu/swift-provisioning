@@ -1,0 +1,23 @@
+# TODO: parameterize swift_base (to include host/port/schema) / reseller_prefix_keystone
+- name: Create Swift service
+  os_keystone_service:
+    auth: "{{ keystone_admin }}"
+    name: swift
+    service_type: object-store
+
+- name: Create public endpoint
+  os_keystone_endpoint:
+    auth: "{{ keystone_admin }}"
+    service: swift
+    endpoint_interface: public
+    url: http://saio:8080/v1/KEY_$(project_id)s
+    region: global
+
+- name: Create internal endpoint
+  os_keystone_endpoint:
+    auth: "{{ keystone_admin }}"
+    service: swift
+    endpoint_interface: internal
+    url: http://localhost:8090/v1/KEY_$(project_id)s
+    region: global
+

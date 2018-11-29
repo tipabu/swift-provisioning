@@ -1,0 +1,6 @@
+- name: Create other-domain project
+  os_project:
+    auth: "{{ keystone_admin }}"
+    domain_id: "{{ other_domain.domain.id }}"
+    name: "{{ primary_project.project.name }}"
+  register: other_domain_project

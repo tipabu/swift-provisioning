@@ -1,0 +1,5 @@
+- name: Create non-default domain
+  os_keystone_domain:
+    auth: "{{ keystone_admin }}"
+    name: other-domain
+  register: other_domain

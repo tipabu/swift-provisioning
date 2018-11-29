@@ -1,0 +1,16 @@
+- name: Create primary user
+  os_user:
+    auth: "{{ keystone_admin }}"
+    domain: Default
+    name: tester
+    password: testing
+    update_password: on_create
+    default_project: "{{ primary_project.project.id }}"
+  register: primary_user
+
+- name: Assign swift_owner role to primary user
+  os_user_role:
+    auth: "{{ keystone_admin }}"
+    project: "{{ primary_project.project.id }}"
+    user: "{{ primary_user.user.id }}"
+    role: "{{ role_swift_owner.role.id }}"

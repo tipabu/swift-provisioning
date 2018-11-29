@@ -1,0 +1,5 @@
+- name: Create swift_reseller_admin role
+  os_keystone_role:
+    auth: "{{ keystone_admin }}"
+    name: swift_reseller_admin
+  register: role_swift_reseller_admin

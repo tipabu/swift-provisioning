@@ -1,0 +1,6 @@
+- name: Create reseller admin project
+  os_project:
+    auth: "{{ keystone_admin }}"
+    domain: Default
+    name: reseller_admin
+  register: reseller_admin_project

@@ -1,0 +1,16 @@
+- name: Create Swift reseller admin user
+  os_user:
+    auth: "{{ keystone_admin }}"
+    domain: Default
+    name: tester6
+    password: testing6
+    update_password: on_create
+    default_project: "{{ reseller_admin_project.project.id }}"
+  register: swift_reseller_admin_user
+
+- name: Assign reseller admin role to Swift reseller admin user
+  os_user_role:
+    auth: "{{ keystone_admin }}"
+    project: "{{ reseller_admin_project.project.id }}"
+    user: "{{ swift_reseller_admin_user.user.id }}"
+    role: "{{ role_swift_reseller_admin.role.id }}"

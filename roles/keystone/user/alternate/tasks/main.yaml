@@ -1,0 +1,24 @@
+- name: Create alternate user
+  os_user:
+    auth: "{{ keystone_admin }}"
+    domain: Default
+    name: tester2
+    password: testing2
+    update_password: on_create
+    default_project: "{{ alternate_project.project.id }}"
+  register: alternate_user
+
+- name: Assign swift_owner role to alternate user for alternate acount
+  os_user_role:
+    auth: "{{ keystone_admin }}"
+    project: "{{ alternate_project.project.id }}"
+    user: "{{ alternate_user.user.id }}"
+    role: "{{ role_swift_owner.role.id }}"
+
+# TODO: I *think* this is a good idea? s3api tests would expect something like this, anyway...
+- name: Also assign swift_owner role to alternate user for primary acount
+  os_user_role:
+    auth: "{{ keystone_admin }}"
+    project: "{{ primary_project.project.id }}"
+    user: "{{ alternate_user.user.id }}"
+    role: "{{ role_swift_owner.role.id }}"

@@ -1,0 +1,3 @@
+dependencies:
+  - role: keystone/domain/other-domain
+  - role: keystone/project/primary

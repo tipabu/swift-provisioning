@@ -1,0 +1,16 @@
+- name: Create non-admin user
+  os_user:
+    auth: "{{ keystone_admin }}"
+    domain: Default
+    name: tester3
+    password: testing3
+    update_password: on_create
+    default_project: "{{ primary_project.project.id }}"
+  register: non_admin_user
+
+- name: Assign swift_noaccess role to non-admin user
+  os_user_role:
+    auth: "{{ keystone_admin }}"
+    project: "{{ primary_project.project.id }}"
+    user: "{{ non_admin_user.user.id }}"
+    role: "{{ role_swift_noaccess.role.id }}"

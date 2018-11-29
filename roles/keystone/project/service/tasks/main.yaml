@@ -1,0 +1,6 @@
+- name: Create service project
+  os_project:
+    auth: "{{ keystone_admin }}"
+    domain: Default
+    name: service
+  register: service_project

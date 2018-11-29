@@ -1,0 +1,16 @@
+- name: Create Swift service user
+  os_user:
+    auth: "{{ keystone_admin }}"
+    domain: Default
+    name: tester5
+    password: testing5
+    update_password: on_create
+    default_project: "{{ primary_project.project.id }}"
+  register: swift_service_user
+
+- name: Assign service role to Swift service user
+  os_user_role:
+    auth: "{{ keystone_admin }}"
+    project: "{{ primary_project.project.id }}"
+    user: "{{ swift_service_user.user.id }}"
+    role: "{{ role_swift_service.role.id }}"

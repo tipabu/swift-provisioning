@@ -1,0 +1,4 @@
+dependencies:
+  - role: keystone/project/alternate
+  - role: keystone/project/primary
+  - role: keystone/role/swift_owner

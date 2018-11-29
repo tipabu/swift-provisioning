@@ -1,0 +1,5 @@
+dependencies:
+  - role: keystone/domain/other-domain
+  - role: keystone/project/other-domain
+  - role: keystone/user/primary
+  - role: keystone/role/swift_owner

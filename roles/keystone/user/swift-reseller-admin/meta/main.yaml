@@ -1,0 +1,3 @@
+dependencies:
+  - role: keystone/project/reseller-admin
+  - role: keystone/role/swift_reseller_admin

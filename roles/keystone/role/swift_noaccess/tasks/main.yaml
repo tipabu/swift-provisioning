@@ -1,0 +1,5 @@
+- name: Create swift_noaccess role
+  os_keystone_role:
+    auth: "{{ keystone_admin }}"
+    name: swift_noaccess
+  register: role_swift_noaccess
